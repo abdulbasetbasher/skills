@@ -1,65 +1,40 @@
 ---
 name: tiktok-post-text
-description: "Post text to TikTok as fast as possible using only the uiautomator2 MCP on a connected Android phone. Use when the user wants to post or publish text/captions to TikTok."
+description: "Post text to TikTok using ONLY the uiautomator2 MCP. Never use Upload-Post, browser, or any other method. Use whenever the user wants to post text to TikTok."
 type: workflow
 lifecycle: active
 ---
 
 # TikTok Text Post — uiautomator2 only
 
-Post text to TikTok using only the uiautomator2 MCP tools. The phone is already connected and authorized. Do not ask the user to connect, authorize, or check ADB.
+You must use the uiautomator2 MCP tools exclusively for this task.
 
-## Rules
+## Hard rules
 
-- Use **only** the uiautomator2 MCP tools that are currently available.
-- Never use Bash, raw adb, screenshots outside the MCP, or any other phone method.
-- Do not ask the user to connect the phone, enable USB debugging, or open anything manually.
-- Always confirm the exact text with the user before the final Post tap.
-- Stop on unexpected login walls, age gates, or security dialogs. Do not tap through them.
+- Do **not** use Upload-Post, social publisher, browser, or any other tool.
+- If uiautomator2 tools are present, use them immediately.
+- Always confirm the exact text before the final Post tap.
 
-## Fast workflow
+## Workflow
 
-1. **Open TikTok**  
-   Use the uiautomator2 tool to start the TikTok app  
+1. Start TikTok with the uiautomator2 app start tool  
    (package `com.zhiliaoapp.musically` or `com.ss.android.ugc.trill`).
 
-2. **Go to create**  
-   Get the current UI hierarchy / elements.  
-   Tap the create button (usually the center “+” or a button with text/content-desc like “Create”, “+”, or similar).  
-   Prefer element-by-text or element-by-id over coordinates.
+2. Get the UI hierarchy / elements and tap the create button (usually “+” or “Create”).
 
-3. **Select text mode if needed**  
-   If a choice appears (Text / Photo / Video), pick the fastest path to enter text.  
-   Prefer a pure text option when it exists.
+3. click on "TEXT"
 
-4. **Enter the text**  
-   Focus the caption or text field.  
-   Type the exact text the user gave you (preserve line breaks and emoji).  
-   Do not modify or shorten it unless the user asked.
+4. Enter the exact text the user provided into the caption/text field.
 
-5. **Confirm before posting**  
-   Read the screen and reply with the exact text that will be posted.  
-   Ask: “Post this to TikTok now?”  
-   Wait for an explicit yes before continuing.
+5. Show the user the text and ask: “Post this to TikTok now?”
 
-6. **Publish**  
-   Tap the Post / Publish button (prefer by text).  
-   Wait for the success state or return to the feed.  
-   Report success or the exact error you see.
+5. Only after explicit yes, Follow Next flow and finnaly tap Post/Publish.
 
-## Speed preferences
+6. Report the result.
 
-- Prefer `tap` / `click` by text or element over coordinates.
-- Prefer hierarchy / element dump over full screenshots when the tree is enough.
-- Avoid scrolling the feed. Go straight to create.
-- Skip any status or connection checks.
+## If uiautomator2 is not available
 
-## Stop conditions
+Say exactly:  
+“uiautomator2 MCP is not available on this bot. Enable it in MCP settings and try again.”
 
-Stop and report to the user if you see:
-- Login or signup screen
-- Age verification or unexpected dialog
-- Post button disabled with no clear reason
-- Any request for password or sensitive input
-
-Do not proceed past these.
+Do not suggest other platforms or Upload-Post.
