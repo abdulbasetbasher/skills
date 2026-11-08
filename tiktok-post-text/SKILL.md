@@ -13,7 +13,7 @@ Post text content to TikTok on a USB-connected Android phone with minimal steps 
 
 - Phone is connected and authorized (`adb devices` shows it).
 - TikTok is already installed and the user is logged in.
-- Phone tools (uiautomator2 MCP, phone MCP, or equivalent) are available and working.
+- Phone tools must be (uiautomator2 MCP) are available and working.
 
 ## Safety (mandatory)
 
