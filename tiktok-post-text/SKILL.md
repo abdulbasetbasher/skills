@@ -1,77 +1,65 @@
 ---
 name: tiktok-post-text
-description: "Post text (or short captions) to TikTok on a connected Android phone as fast as possible using phone/ADB/uiautomator tools. Use when the user wants to post, publish, or upload text content to TikTok quickly."
+description: "Post text to TikTok as fast as possible using only the uiautomator2 MCP on a connected Android phone. Use when the user wants to post or publish text/captions to TikTok."
 type: workflow
 lifecycle: active
 ---
 
-# TikTok Text Post — Fast
+# TikTok Text Post — uiautomator2 only
 
-Post text content to TikTok on a USB-connected Android phone with minimal steps and maximum speed.
+Post text to TikTok using only the uiautomator2 MCP tools. The phone is already connected and authorized. Do not ask the user to connect, authorize, or check ADB.
 
-## Prerequisites
+## Rules
 
-- Phone is connected and authorized (`adb devices` shows it).
-- TikTok is already installed and the user is logged in.
-- Phone tools must be (uiautomator2 MCP) are available and working.
-
-## Safety (mandatory)
-
-1. **Never post without explicit confirmation** of the exact text.
-2. Show the final text and ask “Post this to TikTok now?” before the final publish tap.
-3. Stop immediately if any login wall, age gate, or unexpected dialog appears.
-4. Do not enter passwords, payment info, or accept unexpected legal prompts.
+- Use **only** the uiautomator2 MCP tools that are currently available.
+- Never use Bash, raw adb, screenshots outside the MCP, or any other phone method.
+- Do not ask the user to connect the phone, enable USB debugging, or open anything manually.
+- Always confirm the exact text with the user before the final Post tap.
+- Stop on unexpected login walls, age gates, or security dialogs. Do not tap through them.
 
 ## Fast workflow
 
-1. **Status check**  
-   Call phone status / list devices. Abort with a clear message if the device is missing or unauthorized.
+1. **Open TikTok**  
+   Use the uiautomator2 tool to start the TikTok app  
+   (package `com.zhiliaoapp.musically` or `com.ss.android.ugc.trill`).
 
-2. **Open TikTok**  
-   Launch the TikTok app (package usually `com.zhiliaoapp.musically` or `com.ss.android.ugc.trill`).
+2. **Go to create**  
+   Get the current UI hierarchy / elements.  
+   Tap the create button (usually the center “+” or a button with text/content-desc like “Create”, “+”, or similar).  
+   Prefer element-by-text or element-by-id over coordinates.
 
-3. **Go to create**  
-   - Prefer tapping the center “+” / create button by text or resource-id.  
-   - If not visible, use a short swipe or press the known create button coordinates only as fallback.
+3. **Select text mode if needed**  
+   If a choice appears (Text / Photo / Video), pick the fastest path to enter text.  
+   Prefer a pure text option when it exists.
 
-4. **Choose text / photo mode**  
-   - Look for “Text”, “Photo”, or “Upload” options.  
-   - Prefer text mode if available; otherwise create a simple photo/text overlay.
+4. **Enter the text**  
+   Focus the caption or text field.  
+   Type the exact text the user gave you (preserve line breaks and emoji).  
+   Do not modify or shorten it unless the user asked.
 
-5. **Enter the text**  
-   - Focus the caption / text field.  
-   - Type the exact text the user provided (preserve emojis and line breaks).  
-   - Keep it under TikTok’s limit (typically ~2200 characters; warn if longer).
-
-6. **Confirm with user**  
+5. **Confirm before posting**  
    Read the screen and reply with the exact text that will be posted.  
-   Ask for explicit “yes / post it” before continuing.
+   Ask: “Post this to TikTok now?”  
+   Wait for an explicit yes before continuing.
 
-7. **Publish**  
-   - Tap the “Post” / “Publish” button (prefer `tap_text("Post")`).  
-   - Wait for the success indicator or return to the feed.  
-   - Report success or the exact error.
+6. **Publish**  
+   Tap the Post / Publish button (prefer by text).  
+   Wait for the success state or return to the feed.  
+   Report success or the exact error you see.
 
-## Speed tips
+## Speed preferences
 
-- Prefer `tap_text` over coordinates whenever possible.
-- Cache the create button location after the first successful post in the session.
-- Skip unnecessary screenshots if the accessibility tree already gives clear targets.
-- Avoid scrolling the feed; go straight to create.
+- Prefer `tap` / `click` by text or element over coordinates.
+- Prefer hierarchy / element dump over full screenshots when the tree is enough.
+- Avoid scrolling the feed. Go straight to create.
+- Skip any status or connection checks.
 
-## Common issues
+## Stop conditions
 
-| Problem | Fix |
-|---------|-----|
-| TikTok not logged in | Stop and tell the user to log in manually |
-| Create button not found | Ask user to open TikTok create screen once, then retry |
-| Text field not focused | Tap the caption area by text or bounds, then type |
-| Post button grayed out | Check if text is empty or network is offline; report it |
-| Unexpected dialog | Stop and describe the dialog; do not tap through blindly |
+Stop and report to the user if you see:
+- Login or signup screen
+- Age verification or unexpected dialog
+- Post button disabled with no clear reason
+- Any request for password or sensitive input
 
-## Tool preference order
-
-1. `tap_text` / element by text or content-desc  
-2. Resource-id based tap  
-3. Coordinate tap (only after reading screen)  
-4. Raw ADB input as last resort
+Do not proceed past these.
