@@ -7,11 +7,14 @@ lifecycle: active
 
 # TikTok Text Post — uiautomator2 only
 
+**CRITICAL: This skill must use only the uiautomator2 MCP tools.**
+
 You must use the uiautomator2 MCP tools exclusively for this task.
 
 ## Hard rules
 
-- Do **not** use Upload-Post, social publisher, browser, or any other tool.
+- Do **not** use Upload-Post, social publisher, browser, or any connector.
+- Do **not** ask the user to connect any app or account.
 - If uiautomator2 tools are present, use them immediately.
 - Always confirm the exact text before the final Post tap.
 
