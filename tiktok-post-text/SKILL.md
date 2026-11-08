@@ -18,7 +18,7 @@ You must use the uiautomator2 MCP tools exclusively for this task.
 ## Workflow
 
 1. Start TikTok with the uiautomator2 app start tool  
-   (package `com.zhiliaoapp.musically` or `com.ss.android.ugc.trill`).
+   (package `com.zhiliaoapp.musically/com.ss.android.ugc.aweme.splash.SplashActivity`).
 
 2. Get the UI hierarchy / elements and tap the create button (usually “+” or “Create”).
 
