@@ -19,10 +19,12 @@ You must use the uiautomator2 MCP tools immediately.
 
 ## Workflow
 1. Start TikTok activity: `com.zhiliaoapp.musically/com.ss.android.ugc.aweme.splash.SplashActivity`
-2. Confirm bottom nav with + is visible (press Home if needed)
+2. Confirm bottom nav with + is visible
 3. Tap the center + button
-4. Type the exact text the user provided after the command
-5. Ask “Post this to TikTok now?” and wait for yes
+4. Tap on "TEXT"
+5. Type the exact text the user provided after the command
+6. Follow Next flow until "Post" button shows
+7. Ask “Post this to TikTok now?” and wait for yes
 6. Tap Post/Publish and report result
 
 ## If uiautomator2 tools are missing
